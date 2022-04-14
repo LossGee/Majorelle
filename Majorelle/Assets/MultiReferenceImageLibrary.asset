@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: MultiReferenceImageLibrary
+  m_EditorClassIdentifier: 
+  m_GuidLow: 5549754963716301921
+  m_GuidHigh: 4544314317032927886
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5748220237000261024
+      m_GuidHigh: 15665699185761077661
+    m_SerializedTextureGuid:
+      m_GuidLow: 12305138552728575920
+      m_GuidHigh: 2000269762565777338
+    m_Size: {x: 1, y: 1}
+    m_SpecifySize: 1
+    m_Name: TulipRed
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5591800919298266495
+      m_GuidHigh: 8417216613699832228
+    m_SerializedTextureGuid:
+      m_GuidLow: 2730357940442287640
+      m_GuidHigh: 9370037660125451819
+    m_Size: {x: 1, y: 1}
+    m_SpecifySize: 1
+    m_Name: TulipPurple
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5524722727705435040
+      m_GuidHigh: 4681103225767907740
+    m_SerializedTextureGuid:
+      m_GuidLow: 17124017238902529440
+      m_GuidHigh: 70457166752135257
+    m_Size: {x: 1, y: 1}
+    m_SpecifySize: 1
+    m_Name: TulipYellow
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5000689874932226664
+      m_GuidHigh: 16969379931503224757
+    m_SerializedTextureGuid:
+      m_GuidLow: 5982054956330203884
+      m_GuidHigh: 948093045021732824
+    m_Size: {x: 1, y: 1}
+    m_SpecifySize: 1
+    m_Name: TulipWhite
+    m_Texture: {fileID: 0}
