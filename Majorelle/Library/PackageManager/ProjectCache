@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637854325769797888
-    m_Hash: 228985270
+      ticks: 637855176403530709
+    m_Hash: 1057529631
   m_LockFileStatus:
     m_FilePath: C:/Github/Majorelle/Majorelle/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637854325849564548
-    m_Hash: 1587512919
+      ticks: 637855176403540339
+    m_Hash: 1165375285
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:

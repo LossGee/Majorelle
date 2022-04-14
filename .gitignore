@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+# ignore LFS fire
+Majorelle/Assets/Firebase/Plugins/x86_64/FirebaseCppApp-8_9_0.so

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "794805807432",
+    "firebase_url": "https://majorelle-c1849-default-rtdb.firebaseio.com",
+    "project_id": "majorelle-c1849",
+    "storage_bucket": "majorelle-c1849.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794805807432:android:9c4a01734202ce789fab7d",
+        "android_client_info": {
+          "package_name": "com.ImaginationInLife.Majorelle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794805807432-6h3o0dsf95qk3p9g1ng5jaab47h6dhmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKT-PzmLqFE5gZYuV7yveSGBa_Lhm5K0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794805807432-6h3o0dsf95qk3p9g1ng5jaab47h6dhmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
