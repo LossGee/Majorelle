@@ -18,6 +18,8 @@ public class IAMFlower : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+
+
     }
 
 
@@ -41,7 +43,7 @@ public class IAMFlower : MonoBehaviour
         {
             animator.SetTrigger("Bloom");
             state = State.SMILE;
-            return 3;
+            return 4;
         }
         else
         {

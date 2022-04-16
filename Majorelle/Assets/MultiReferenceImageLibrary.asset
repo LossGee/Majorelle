@@ -23,7 +23,7 @@ MonoBehaviour:
       m_GuidHigh: 2000269762565777338
     m_Size: {x: 1, y: 1}
     m_SpecifySize: 1
-    m_Name: TulipRed
+    m_Name: uidObject_0
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5591800919298266495
@@ -33,7 +33,7 @@ MonoBehaviour:
       m_GuidHigh: 9370037660125451819
     m_Size: {x: 1, y: 1}
     m_SpecifySize: 1
-    m_Name: TulipPurple
+    m_Name: uidObject_1
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5524722727705435040
@@ -43,7 +43,7 @@ MonoBehaviour:
       m_GuidHigh: 70457166752135257
     m_Size: {x: 1, y: 1}
     m_SpecifySize: 1
-    m_Name: TulipYellow
+    m_Name: uidObject_2
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5000689874932226664
@@ -53,5 +53,5 @@ MonoBehaviour:
       m_GuidHigh: 948093045021732824
     m_Size: {x: 1, y: 1}
     m_SpecifySize: 1
-    m_Name: TulipWhite
+    m_Name: uidObject_3
     m_Texture: {fileID: 0}

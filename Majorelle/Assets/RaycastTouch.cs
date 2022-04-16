@@ -63,11 +63,14 @@ public class RaycastTouch : MonoBehaviour
         messageUI.SetActive(true);
     }
 
+
     public void OnClickMessageFinish()
     {
         messageUI.SetActive(false);
         isUseMessageUI = false;
     }
+
+
 
 
     void UpdateMessageUIForAndroid()

@@ -26,14 +26,12 @@ public class MultiMarker : MonoBehaviour
     }
 
     [System.Serializable]
-
     public class MarkerInfo
     {
         public string name;
         public GameObject obj;
     }
     public MarkerInfo[] infos;
-
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs args)
     {
         var list = args.updated;
@@ -61,5 +59,11 @@ public class MultiMarker : MonoBehaviour
             }
 
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
