@@ -6,13 +6,12 @@ using Firebase.Database;
 using Firebase.Extensions;
 using System;
 
-
 public class dbManager : MonoBehaviour
 {
-    public static dbManager Instance;
+    //public static dbManager Instance;
     private void Awake()
     {
-        Instance = this;
+        //Instance = this;
         FirebaseApp.DefaultInstance.Options.DatabaseUrl = new Uri(DBurl);
         reference = FirebaseDatabase.DefaultInstance.RootReference;
     }
@@ -22,36 +21,40 @@ public class dbManager : MonoBehaviour
     DatabaseReference reference;
 
     // DB control variable
-    string myStateMessage = "Now Loading";
-    string guestMessage = "Now Loading";
-    string notice = "Now Loading";
-    string todayCafeteriaMenu = "Now Loading";
+    public string myStateMessage = "Now Loading";
+    public string notice = "Now Loading";
+    public string todayCafeteriaMenu = "Now Loading";
+    public List<string> guestList = new List<string>();
+    public List<string> guestMessage = new List<string>();
 
-    bool isReceiveMyStateMessage = false;
-    bool isReceiveGuestMessage = false;
-    bool isReceiveNotice = false;
-    bool isReceiveMenu = false;
-
+    // DB receive Check varibles
+    public bool isReceiveMyStateMessage = false;
+    public bool isReceiveGuestList = false;
+    public bool isReceiveGuestMessage = false;
+    public bool isReceiveNotice = false;
+    public bool isReceiveMenu = false;
 
     void Start()
     {
         // <Initialize>
-        //InitializeDB();                                                               // 초기화 함수
+        //InitializeDB();                                                                 // 초기화 함수
 
         // <Read Test>
         //ReadMyState("오수진");                                                          // test My state message Read form DB
         //ReadGuestMesssage("오수진", "Majorelle");                                       // test Guest message read form DB
         //ReadNotice();                                                                   // test Notice read from DB
         //ReadTodayCafeteriaMenu();                                                       // test today menu from Db
+        //ReadGuestList("오수진");
 
         // <Write Test>
         //WriteMystateMessage("오수진", "안녕하세요.\n 오수진입니다 :)");
         //WriteGuestMessage("오수진", "문종국", "해위해위");
+        //WriteGuestMessage("오수진", "서영호", "밥먹으로 갈까?");
         //WriteTodayCafeteriaMenu("[오늘의 구내식당 메뉴\n○밥\n○육빔소\n○해빔소");
         //WriteNotice("[오늘의 공지사항]\n 복습 시급...! 휴일 필요...");
 
         // <Remove Test>
-        RemoveGuestMessage("오수진", "문종국");
+        //RemoveGuestMessage("오수진", "문종국");
     }
 
     void Update()
@@ -69,6 +72,17 @@ public class dbManager : MonoBehaviour
             CompleteReceiveGuestMessage();
         }
 
+        if (isReceiveGuestList)
+        {
+            print("guestList");
+            for (int i = 0; i < guestList.Count; i++)
+            {
+                print("guestName:" + guestList[i] + "guestMessage" + guestMessage[i]);
+            }
+            print(guestList.Count);
+            CompleteReceiveGuestList();
+        }
+
         if (isReceiveNotice)
         {
             print("notice" + notice);
@@ -80,6 +94,7 @@ public class dbManager : MonoBehaviour
             print("todayCafeteriaMenu" + todayCafeteriaMenu);
             CompleteReceiveMenu();
         }
+        //print(guestLikt.Count);
     }
 
     // InitializeDB(): FirebaseDB 초기화
@@ -113,9 +128,8 @@ public class dbManager : MonoBehaviour
     // ReadMyState(): DB에서 상태메시지 읽어오기
     public void ReadMyState(string uid)
     {
-        myStateMessage = "Now Loading...";
 
-        FirebaseDatabase.DefaultInstance                                            // Async는 Network에 요청한 내용이 도착할 때까지 숨참고 있는 함수라고 생각하면 됨
+        FirebaseDatabase.DefaultInstance                                                    // Async는 Network에 요청한 내용이 도착할 때까지 숨참고 있는 함수라고 생각하면 됨
             .GetReference(uid)
             .GetValueAsync().ContinueWithOnMainThread(task =>
             {
@@ -127,22 +141,49 @@ public class dbManager : MonoBehaviour
                 {
                     DataSnapshot snapshot = task.Result;
 
-                    // 여기에서 StateMessage만 가져오면 됨.
                     foreach (var childSnapshot in snapshot.Children)
                     {
                         if (childSnapshot.Key == "stateMessage")
                         {
                             myStateMessage = childSnapshot.Value.ToString();
-                            if (null != myStateMessage)
-                            {
-                                isReceiveMyStateMessage = true;
-                            }
                         }
                     }
+                    isReceiveMyStateMessage = true;
                 }
             });
     }
 
+    // ReadGuestList(): 방명록을 작성한 Guest들의 목록 가져오기
+    public void ReadGuestList(string uid)
+    {
+        FirebaseDatabase.DefaultInstance
+           .GetReference(uid).Child("guestMessage")
+           .GetValueAsync().ContinueWithOnMainThread(task =>
+           {
+               if (task.IsFaulted)
+               {
+                   Debug.Log("Read My State Fail");
+               }
+               else if (task.IsCompleted)
+               {
+                   DataSnapshot snapshot = task.Result;
+
+                   foreach (var childSnapshot in snapshot.Children)
+                   {
+                       string guest = childSnapshot.Key;
+                       guestList.Add(guest);
+                   }
+
+                   foreach (var guest in guestList)
+                   {
+                       string message = snapshot.Child(guest).Child("message").Value.ToString();
+                       guestMessage.Add(message);
+                   }
+
+               }
+               isReceiveGuestList = true;
+           });
+    }
 
     // ReadGuestMesssage(): Geust Message 읽어오기 
     public void ReadGuestMesssage(string uid, string guest_uid)
@@ -159,19 +200,14 @@ public class dbManager : MonoBehaviour
                {
                    DataSnapshot snapshot = task.Result;
 
-                   // 여기에서 StateMessage만 가져오면 됨.
                    foreach (var childSnapshot in snapshot.Children)
                    {
                        if (childSnapshot.Key == "message")
                        {
-                           //print(childSnapshot.Child("Medici").Child("message").Value);
-                           guestMessage = childSnapshot.Value.ToString();
-                           if (null != guestMessage)
-                           {
-                               isReceiveGuestMessage = true;
-                           }
+                           //guestMessage = childSnapshot.Value.ToString();
                        }
                    }
+                   isReceiveGuestMessage = true;
                }
            });
     }
@@ -197,14 +233,10 @@ public class dbManager : MonoBehaviour
                    {
                        if (childSnapshot.Key == "notice")
                        {
-                           //print(childSnapshot.Key + " : " + childSnapshot.Value);
                            notice = childSnapshot.Value.ToString();
-                           if (null != notice)
-                           {
-                               isReceiveNotice = true;
-                           }
                        }
                    }
+                   isReceiveNotice = true;
                }
            });
     }
@@ -231,12 +263,9 @@ public class dbManager : MonoBehaviour
                        {
                            //print(childSnapshot.Child("Medici").Child("message").Value);
                            todayCafeteriaMenu = childSnapshot.Value.ToString();
-                           if (null != todayCafeteriaMenu)
-                           {
-                               isReceiveMenu = true;
-                           }
                        }
                    }
+                   isReceiveMenu = true;
                }
            });
     }
@@ -294,21 +323,10 @@ public class dbManager : MonoBehaviour
 
 
     // [Check Receive Message]
-    public void CompleteReceiveMyStateMessage()
-    {
-        isReceiveMyStateMessage = false;
-    }
-    public void CompleteReceiveGuestMessage()
-    {
-        isReceiveGuestMessage = false;
-    }
-    public void CompleteReceiveNotice()
-    {
-        isReceiveNotice = false;
-    }
-    public void CompleteReceiveMenu()
-    {
-        isReceiveMenu = false;
-    }
+    public void CompleteReceiveMyStateMessage() { isReceiveMyStateMessage = false; }
+    public void CompleteReceiveGuestList() { isReceiveGuestList = false; }
+    public void CompleteReceiveGuestMessage() { isReceiveGuestMessage = false; }
+    public void CompleteReceiveNotice() { isReceiveNotice = false; }
+    public void CompleteReceiveMenu() { isReceiveMenu = false; }
 
 }
